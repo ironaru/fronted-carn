@@ -1,0 +1,17 @@
+.container {
+  width: 100%;
+  // max-width: 400px;
+}
+
+form {
+  display: flex;
+  align-content: center;
+}
+
+ion-card {
+  padding-bottom: 20px;
+}
+ion-toolbar {
+  --background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+  --color: #ffffff;
+}

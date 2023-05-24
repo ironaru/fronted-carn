@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Tarifas</ion-title>
+    <ion-buttons slot="end" *ngIf="btnAdd">
+      <ion-button (click)="menuPop($event)">
+        <ion-icon name="ellipsis-horizontal-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class=" contenido">
+    <div class="abs-center" *ngIf="loaded">
+      <ion-list lines="none">
+        <ion-item detail="false" *ngFor="let data of list" button>
+            <ion-label>
+              <ion-text  color="light" class="font-sans-serif">
+                Fecha Inicial:
+              </ion-text>
+              <ion-text class="text-dark font-sans-serif">{{data.fechaInic | date:"dd/MM/yyyy"}}</ion-text>
+              <br>
+              <ion-text color="light" class="font-sans-serif">
+                Consumo Máximo:
+              </ion-text>
+              <ion-text class="text-dark font-sans-serif">{{data.consumoMax}}</ion-text>
+              <br>
+              <ion-text  color="light" class="font-sans-serif">
+                Costo Unitario:
+              </ion-text>
+              <ion-text class="text-dark font-sans-serif">{{data.costoUnit}}</ion-text>
+            </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+    <div class="abs-center" *ngIf="!loaded">
+      <ion-list lines="none">
+        <ion-item *ngFor="let data of list">
+            <ion-label >
+              <ion-text>
+                <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+              </ion-text>
+              <ion-text>
+                <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+              </ion-text>
+              <ion-text>
+                <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+              </ion-text>
+            </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+</ion-content>

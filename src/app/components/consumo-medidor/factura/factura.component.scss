@@ -1,0 +1,15 @@
+.contenido{
+  height: 100%;
+  width: 100%;
+}
+.abs-center {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  padding: 5%;
+}
+ion-toolbar {
+  --background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+  --color: #ffffff;
+}

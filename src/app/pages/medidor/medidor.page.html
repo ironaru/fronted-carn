@@ -1,0 +1,45 @@
+<ion-header mode="md">
+  <ion-toolbar>
+    <ion-title>Medidores</ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar class="custom" placeholder="Buscar serial" debounce="250" (ionChange)="handleChange($event)"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class=" contenido">
+    <div class="abs-center" *ngIf="loaded">
+      <ion-list lines="none">
+        <ion-item detail="false" class="mb-2 mt-2" button *ngFor="let medidor of list | filtroMedidor:textoBuscar"
+          (click)="itemPop($event, medidor)">
+          <ion-label class="m-0 p-2">
+            <ion-text color="light" class="font-sans-serif">
+              Serial:
+              <ion-text class="text-dark font-sans-serif">{{medidor?.serial}}</ion-text>
+            </ion-text>
+            <br>
+            <ion-text color="light" class="font-sans-serif">
+              Marca:
+              <ion-text class="text-dark font-sans-serif">{{medidor?.marca}}</ion-text>
+            </ion-text>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+    <div class="abs-center" *ngIf="!loaded">
+      <ion-list lines="none">
+        <ion-item button="false" detail="false" *ngFor="let medidor of list">
+          <ion-label class="m-0 p-2">
+            <ion-text>
+              <ion-skeleton-text [animated]="true" class="w-50"></ion-skeleton-text>
+            </ion-text>
+            <ion-text>
+              <ion-skeleton-text [animated]="true" class="w-50"></ion-skeleton-text>
+            </ion-text>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+</ion-content>

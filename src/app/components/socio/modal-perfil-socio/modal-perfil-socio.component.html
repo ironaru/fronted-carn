@@ -1,0 +1,187 @@
+<!-- eslint-disable @angular-eslint/template/eqeqeq -->
+<ion-header mode="md">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="cerrar()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Socio</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="editar()" *ngIf="verificaRol()" [disabled]="form.invalid">
+        <ion-icon [name]="iedit"></ion-icon>
+      </ion-button>
+      <ion-button *ngIf="!edit && verificaRol()"  (click)="menuPop($event)">
+        <ion-icon name="ellipsis-horizontal-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card mode="ios">
+    <ion-card-header>
+      <ion-card-title>Socio</ion-card-title>
+    </ion-card-header>
+    <div class="img-wrapper">
+      <img class="lazyload" [src]="previsualizacion" class="border border-1 border-dark rounded-3" />
+      <ion-button color="light" [disabled]="fotoDisabled">
+        <ion-input class="FileUpload" accept=".jpg,.png,.jpeg" type="file" (change)="capturarFile($event)"></ion-input>
+        <ion-icon slot="icon-only" name="camera-outline" color="medium"></ion-icon>
+      </ion-button>
+    </div>
+    <ion-card-content class="ion-text-center ion-no-padding">
+      <ion-text color="dark">
+        {{ usuario?.usuario }}
+      </ion-text>
+    </ion-card-content>
+
+    <ion-card-content>
+      <ion-text color="dark">
+        <form [formGroup]="form" autocomplete="off">
+          <ion-grid>
+            <ion-row class="ion-justify-content-center">
+              <ion-col size="5" size-sm="5">
+                <ion-text color="dark">
+                  <h6 class="w-100">CI:</h6>
+                </ion-text>
+              </ion-col>
+              <ion-col size="6" size-sm="6">
+                <ion-text color="medium">
+                  <h6 class="w-100 text-end">
+                    {{ usuario?.socio.ci }}
+                  </h6>
+                </ion-text>
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-justify-content-center">
+              <ion-col size="11" size-sm="5">
+                <ion-text color="dark">
+                  <h6 class="w-100">Nombres:</h6>
+                </ion-text>
+              </ion-col>
+              <ion-col size="11" size-sm="6">
+                <input formControlName="nombres" name="nombres" type="text"
+                  class="w-100 p-1 border border-dark border-opacity-25 rounded-2 text-end" />
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-justify-content-center">
+              <ion-col size="11" size-sm="5">
+                <ion-text color="dark">
+                  <h6 class="w-100">Apellidos:</h6>
+                </ion-text>
+              </ion-col>
+              <ion-col size="11" size-sm="6">
+                <input formControlName="apellidos" name="apellidos" type="text"
+                  class="w-100 p-1 border border-dark border-opacity-25 rounded-2 text-end" />
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-justify-content-center">
+              <ion-col size="11" size-sm="5">
+                <ion-text color="dark">
+                  <h6 class="w-100">Celular:</h6>
+                </ion-text>
+              </ion-col>
+              <ion-col size="11" size-sm="6">
+                <input minlength="7" formControlName="celular" name="celular" type="number"
+                  class="w-100 p-1 border border-dark border-opacity-25 rounded-2 text-end" required=""/>
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-justify-content-center">
+              <ion-col size="11" size-sm="5">
+                <ion-text color="dark">
+                  <h6 class="w-100">email:</h6>
+                </ion-text>
+              </ion-col>
+              <ion-col size="11" size-sm="6">
+                <input pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" formControlName="correo" name="correo" type="email"
+                  class="w-100 p-1 border border-dark border-opacity-25 rounded-2 text-end" />
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-justify-content-center">
+              <ion-col size="11" size-sm="5">
+                <ion-text color="dark">
+                  <h6 class="w-100">Fecha de nacimiento:</h6>
+                </ion-text>
+              </ion-col>
+              <ion-col size="11" size-sm="6">
+                <input formControlName="fechaNac" name="fechaNac" type="date"
+                  class="w-100 p-1 border border-dark border-opacity-25 rounded-2 text-end" required />
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-justify-content-center">
+              <ion-col size="5" size-sm="5">
+                <ion-text color="dark">
+                  <!-- <h6 class="w-100"> -->
+                  Fecha de registro:
+                  <!-- </h6> -->
+                </ion-text>
+                <ion-text color="medium">
+                  <!-- <h6 class="w-100 text-end"> -->
+                  {{ usuario?.socio.fechaReg | date : "dd/MM/yyyy" }}
+                  <!-- </h6> -->
+                </ion-text>
+              </ion-col>
+              <ion-col size="6" size-sm="6">
+                <ion-text color="dark">
+                  Activo:
+                </ion-text>
+                <input class="w-25 p-1 border border-dark border-opacity-25 rounded-2 text-end" formControlName="activo"
+                  name="activo" type="checkbox" />
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-justify-content-center">
+              <ion-col size="11" size-sm="5">
+                <ion-text color="dark">
+                  <h6 class="w-100">Dirección:</h6>
+                </ion-text>
+              </ion-col>
+              <ion-col size="11" size-sm="6">
+                <input formControlName="direccion" name="direccion" type="text"
+                  class="w-100 p-1 border border-dark border-opacity-25 rounded-2 text-end" />
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-justify-content-center">
+              <ion-col size="11" size-sm="2">
+                <ion-text color="dark">
+                  <h6 class="pt-2 pb-2 m-0 w-100">Roles:</h6>
+                </ion-text>
+              </ion-col>
+              <ion-col size="11" size-sm="9">
+                <ion-item lines="none" class="h-75">
+                  <ion-select class="w-100 text-end" formControlName="roles" name="roles" placeholder="Ninguno"
+                    okText="Aceptar" [compareWith]="compareWith" cancelText="Cancelar" [value]="usuario?.roles"
+                    multiple="true" required>
+                    <ion-select-option *ngFor="let rol of roles" [value]="rol">{{ rol?.autoridad }}
+                    </ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
+      </ion-text>
+    </ion-card-content>
+  </ion-card>
+  <ion-card mode="ios" *ngIf="medidores.length > 0">
+    <ion-card-header>
+      <ion-card-title>Medidores</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-text color="dark">
+        <h5>Cantidad: {{medidores.length}}</h5>
+      </ion-text>
+      <ion-list>
+        <ion-card class="medidores" (click)="popMedidor($event,medidor)" button *ngFor="let medidor of medidores">
+          <ion-card-content>
+            <ion-text color="dark">
+              Serial: {{medidor?.serial}}
+            </ion-text><br>
+            <ion-text color="dark">
+              Marca: {{medidor?.marca}}
+            </ion-text>
+          </ion-card-content>
+        </ion-card>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

@@ -1,0 +1,93 @@
+<ion-header mode="md">
+  <ion-toolbar>
+    <ion-buttons size="small" slot="start">
+      <ion-button (click)="cerrar()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Cobro</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding h-auto">
+  <ion-card mode="ios">
+    <ion-card-header>
+      <ion-card-title>Factura N° {{cobro?.idFactura.id}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid >
+        <ion-row class="ion-justify-content-center">
+          <ion-col size="3" sizeSm="3">NIT: </ion-col>
+          <ion-col size="9" sizeSm="9">
+            <ion-text>
+              {{cobro?.idFactura.nit}}
+            </ion-text>
+          </ion-col>
+          <ion-col size="3" sizeSm="3">Razón Social: </ion-col>
+          <ion-col size="9" sizeSm="9">
+            <ion-text>
+              {{cobro?.idFactura.razonSocial}}
+            </ion-text>
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-justify-content-center">
+          <ion-col size="3" sizeSm="2">Fecha: </ion-col>
+          <ion-col size="9" sizeSm="5">
+            <ion-text>
+              {{fecha}}
+            </ion-text>
+          </ion-col>
+          <ion-col size="3" sizeSm="2">Hora: </ion-col>
+          <ion-col size="9" sizeSm="3">
+            <ion-text>
+              {{cobro?.fechaHora | date:'hh:mm a'}}
+            </ion-text>
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-justify-content-center">
+          <ion-col size="12" sizeSm="12"><strong>Detalle de consumo </strong></ion-col>
+          <ion-col size="7" sizeSm="6">Consumo: </ion-col>
+          <ion-col size="5" sizeSm="6">
+            <ion-text>
+              {{cobro?.idFactura.idConsumo.lectura | number:'0.2'}}
+            </ion-text>
+          </ion-col>
+          <ion-col size="7" sizeSm="6">Tarifa del mes: </ion-col>
+          <ion-col size="5" sizeSm="6">
+            <ion-text>
+              {{tarifa() | number:'0.2'}} Bs.
+            </ion-text>
+          </ion-col>
+          <ion-col size="7" sizeSm="6">Total consumo: </ion-col>
+          <ion-col size="5" sizeSm="6">
+            <ion-text>
+              {{cobro?.idFactura.monto | number:'0.2'}} Bs.
+            </ion-text>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="cobro.idMulta != null" class="ion-justify-content-center">
+          <ion-col size="12" sizeSm="12"><strong>Detalle de multa </strong></ion-col>
+          <!-- <ion-col size="12" sizeSm="12">Descripción: </ion-col> -->
+          <ion-col size="12" sizeSm="12">
+            <ion-text>
+              {{cobro?.idMulta.descripcion}}
+            </ion-text>
+          </ion-col>
+          <ion-col size="7" sizeSm="6">Total multa: </ion-col>
+          <ion-col size="5" sizeSm="6">
+            <ion-text>
+              {{cobro?.idMulta.monto | number:'0.2'}} Bs.
+            </ion-text>
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-justify-content-center">
+          <ion-col size="7" sizeSm="6"><strong>Total: </strong></ion-col>
+          <ion-col size="5" sizeSm="6">
+            <ion-text>
+              {{cobro?.monto}} Bs.
+            </ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

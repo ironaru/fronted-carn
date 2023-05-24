@@ -1,0 +1,112 @@
+<ion-header mode="md">
+  <ion-toolbar>
+    <ion-buttons size="small" slot="start">
+      <ion-button (click)="cerrar()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Factura</ion-title>
+    <ion-buttons size="small" slot="end">
+      <ion-button *ngIf="!editar" (click)="edit()">
+        <ion-icon name='create'></ion-icon>
+      </ion-button>
+      <ion-button *ngIf="editar" (click)="save()" [disabled]="multaForm.invalid">
+        <ion-icon name='checkmark-circle'></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="contenido">
+    <div class="abs-center">
+      <div class="" id="htmlData">
+        <h6 style="text-align: left">
+          Gestión de Comité de Agua Potable Rancho Norte
+        </h6>
+        <h6 style="text-align: right"><b>NIT: </b>{{ factura?.nit }}</h6>
+        <h1 style="font-size: 36px; text-align: center; font-weight: bold">
+          Factura N° {{ factura?.id }}
+        </h1>
+        <br><br>
+        <h2 style="font-size: 17px; font-weight: normal">
+          <b>Cliente:</b> {{ factura?.razonSocial }}
+        </h2>
+        <h2 style="font-size: 17px; font-weight: normal">
+          <b>Fecha:</b> {{ fecha }}
+        </h2>
+
+        <hr />
+        <h2 style="font-size: 17px; font-weight: normal">
+          <b>Detalle de consumo</b>
+        </h2>
+        <h3 style="font-size: 17px; font-weight: normal">
+          Pago del mes de {{ factura?.periodo }}
+        </h3>
+        <p style="font-size: 18px; margin-right: 20px; text-align: left;">
+          Tarifa del mes: {{ tarifa?.costoUnit | number : "0.1-2" }} <br>
+          Consumo del mes: {{ consumo?.lectura | number : "0.1-2" }}
+        </p>
+
+        <p style="font-size: 18px; margin-right: 20px; text-align: right;">
+          Total: {{ factura?.monto | number : "0.1-2" }} Bs.
+        </p>
+
+        <hr *ngIf="!editar && multa?.monto>0"/>
+        <h2 *ngIf="!editar && multa?.monto>0" style="font-size: 17px; font-weight: normal">
+          <b>Detalle de multa</b>
+        </h2>
+        <h3 *ngIf="!editar && multa?.monto>0" style="font-size: 17px; font-weight: normal">
+          {{ multa?.descripcion }}
+        </h3>
+        <p *ngIf="!editar && multa?.monto>0" style="font-size: 18px; margin-right: 20px; text-align: right;">
+          Total: {{ multa?.monto | number : "0.1-2" }} Bs.
+        </p>
+
+        <form *ngIf="editar" [formGroup]="multaForm">
+          <ion-grid >
+            <hr>
+            <ion-text color="dark">
+              <h3>Multa</h3>
+            </ion-text>
+            <ion-row>
+              <ion-col size="12" size-sm="12">
+                <ion-text color="dark">Detalle:</ion-text><br>
+                <ion-textarea  placeholder="Escribe el detalle de la multa" class="p-1 border border-dark rounded-2 border-opacity-50" formControlName="descripcion" name="descripcion" [autoGrow]="true" >
+                </ion-textarea>
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-justify-content-center">
+              <ion-col size="6" size-sm="6">
+                <ion-text color="dark">
+                  Monto:
+                  <input type="number" class="p-1 border border-dark border-opacity-50 rounded-2 text-end" formControlName="monto" name="monto" placeholder="Bs">
+                </ion-text>
+              </ion-col>
+              <ion-col size="6" size-sm="6">
+
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
+        <hr/>
+        <h3 style="font-size: 17px; font-weight: bolder">
+          Periodo:{{ factura?.periodo }}
+        </h3>
+        <p *ngIf="!editar" style="font-size: 18px; margin-right: 20px;  text-align: right;">
+          <b>Total:</b> {{total()}} Bs.
+        </p>
+
+        <!-- <h2>Pagado</h2> -->
+      </div>
+      <ion-grid *ngIf="!editar">
+        <ion-row class="ion-justify-content-center">
+          <ion-col size="4" sizeSm="3">
+            <ion-button size="small" color="primary" (click)="facturar()" expand="block">
+              Facturar
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </div>
+</ion-content>

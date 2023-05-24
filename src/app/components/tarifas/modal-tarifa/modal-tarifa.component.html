@@ -1,0 +1,61 @@
+<ion-header mode="md">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="cancelar()">
+        Cerrar
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Tarifa</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="guardar()" [disabled]="form.invalid">
+        <ion-icon name='checkmark-circle'></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card mode="ios">
+    <ion-card-header>
+      <ion-card-title>Ingrese los datos de la nueva Tarifa</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-text color="dark">
+        <form [formGroup]="form">
+          <ion-row class="ion-justify-content-center">
+            <ion-col size="12" size-sm="6">
+
+              <ion-text color="dark">
+                Fecha Inicial
+              </ion-text>
+              <input [min]="min" [max]="max" type="date" class="w-100 p-1 border border-dark border-opacity-25 rounded-2 text-end"
+              formControlName="fechaInic" name="fechaInic" placeholder="" required>
+            </ion-col>
+            <ion-col size="12" size-sm="6">
+              <ion-text color="dark">
+                <h6 class="">Consumo máximo</h6>
+              </ion-text>
+              <input type="number" class="w-100 p-1 border border-dark border-opacity-25 rounded-2 text-end"
+              formControlName="consumoMax" name="consumoMax" placeholder="" required>
+            </ion-col>
+          </ion-row>
+          <ion-row class="ion-justify-content-center">
+            <ion-col size="12" size-sm="6">
+
+              <ion-text color="dark">
+                Costo unitario (Bs)
+              </ion-text>
+              <input type="number" class="w-100 p-1 border border-dark border-opacity-25 rounded-2 text-end"
+              formControlName="costoUnit" name="costoUnit" placeholder="Bs" required>
+            </ion-col>
+            <ion-col size="12" size-sm="6">
+              <ion-text color="dark">
+              </ion-text>
+            </ion-col>
+          </ion-row>
+        </form>
+      </ion-text>
+    </ion-card-content>
+
+  </ion-card>
+
+</ion-content>

@@ -1,0 +1,52 @@
+<ion-header mode="md">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="cerrar()">
+        Cancelar
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Comunicado</ion-title>
+    <ion-buttons slot="end">
+      <ion-button [disabled]="comunicadoForm.invalid" (click)="confirmar()" [strong]="true">
+        <ion-icon name="checkmark-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card class="abs-center" mode="ios">
+    <ion-card-content>
+      <ion-card-title>
+        Ingrese el nuevo comunicado
+      </ion-card-title>
+      <form [formGroup]="comunicadoForm">
+        <br>
+        <ion-text color="dark">Descripción:</ion-text><br>
+        <ion-textarea placeholder="Escribe tu comunicado" class="p-2 border border-dark rounded-2 border-opacity-100"
+          formControlName="descripcion" name="descripcion" [autoGrow]="true" required>
+        </ion-textarea>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="6" size-sm="6">
+              <ion-text class="w-100 form-label" color="dark">Fecha Inicial: </ion-text>
+            </ion-col>
+            <ion-col size="6" size-sm="6">
+              <input [min]="today | date: 'yyyy-MM-dd'" [value]="today | date: 'yyyy-MM-dd'" type="date"
+                class="w-100 p-1 border border-dark rounded-2 border-opacity-50 text-end" required>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="6" size-sm="6">
+              <ion-text class="w-100 form-label" color="dark">Vigencia(días):</ion-text>
+            </ion-col>
+            <ion-col size="6" size-sm="6">
+              <input min="1" type="number" class="w-100 p-1 border border-dark border-opacity-50 rounded-2 text-end"
+                formControlName="vigencia" name="vigencia" placeholder="" required>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

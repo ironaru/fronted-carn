@@ -1,0 +1,67 @@
+<ion-content>
+  <ion-button (click)="generaReporte()"  expand="block" fill="clear" shape="round">
+    Generar reporte
+  </ion-button>
+
+  <div id="htmlData" hidden="true">
+    <h4 style="width: 100%; text-align: center;">
+      Reporte de cobros
+    </h4>
+    <p *ngIf="fechaI.toString() != ''" style="margin-bottom: 0px; width: 100%;"><strong>Desde: </strong> {{fechaI | date:"dd/MM/yyyy"}}  <strong>Hasta: </strong>{{fechaF | date:"dd/MM/yyyy"}}</p>
+    <p *ngIf="fechaF.toString()!= ''" style="margin-bottom: 0px; width: 100%;"><strong>Hasta: </strong>{{fechaF | date:"dd/MM/yyyy"}}</p>
+    <br>
+    <table style="width: 50cm;">
+      <colgroup>
+				<col style="width: 10%"/>
+				<col style="width: 20%"/>
+				<col style="width: 30%"/>
+        <col style="width: 40%"/>
+			</colgroup>
+      <tbody>
+        <tr>
+          <td scope="col">
+            <p style="margin-bottom: 0px; font-weight: bold; width: 100%; text-align: center;"><strong>N°</strong></p>
+
+          </td>
+          <td scope="col">
+            <p style="margin-bottom: 0px; font-weight: bold; width: 100%; text-align: center;"><strong>Nro Factura</strong></p>
+          </td>
+          <td scope="col">
+            <p style="margin-bottom: 0px; font-weight: bold; width: 100%; text-align: center;"><strong>NIT</strong></p></td>
+          <td scope="col">
+            <p style="margin-bottom: 0px; font-weight: bold; width: 100%; text-align: center;"><strong>Fecha y Hora</strong></p></td>
+          <td scope="col">
+            <p style="margin-bottom: 0px; font-weight: bold; width: 100%; text-align: center;"><strong>Monto</strong></p></td>
+        </tr>
+        <tr *ngFor="let cobro of cobros;  let i=index;">
+          <td >
+            <p style="margin-bottom: 0px; font-weight: lighter; width: 100%; text-align: right;">{{i+1}}</p></td>
+          <td>
+            <p style="margin-bottom: 0px; font-weight: lighter; width: 100%; text-align: right;">{{cobro?.idFactura.id}}</p>
+          </td>
+          <td>
+            <p style="margin-bottom: 0px; font-weight: lighter; width: 100%; text-align: right;">{{cobro?.idFactura.nit}}</p>
+          </td>
+          <td>
+            <p style="margin-bottom: 0px; font-weight: lighter; width: 100%; text-align: right;">{{cobro?.fechaHora | date: 'dd/MM/yyyy hh:mm a'}}</p>
+          </td>
+          <td>
+            <p style="margin-bottom: 0px; font-weight: lighter; width: 100%; text-align: right;">{{cobro?.monto | number:'0.2'}}</p>
+          </td>
+        </tr>
+
+
+      </tbody>
+      <tfoot>
+        <tr>
+          <td  colspan="4">
+            <p style="margin-bottom: 0px;  font-weight: bolder;  text-align: left;" ><strong>Total</strong></p>
+          </td>
+          <td >
+            <p style="margin-bottom: 0px;  font-weight: bolder; width: 100%; text-align: right;"><strong>{{totalCobro() | number:'0.2'}}</strong></p>
+          </td>
+        </tr>
+			</tfoot>
+      </table>
+  </div>
+</ion-content>
