@@ -1,0 +1,59 @@
+<ion-header mode="md">
+  <ion-toolbar>
+    <ion-title>Socios</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="menuPop($event)">
+        <ion-icon name="ellipsis-horizontal-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar class="custom" placeholder="Buscar ci" debounce="250" (ionChange)="handleChange($event)"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" [fullscreen]="true">
+
+  <div class=" contenido">
+    <div class="abs-center" *ngIf="loaded">
+      <ion-list lines="none">
+        <ion-item *ngFor="let usuario of list | filtro:textoBuscar" (click)="itemSocio($event, usuario)" button detail="false">
+          <ion-thumbnail slot="start">
+            <ion-img [src]="usuario?.socio.foto" *ngIf="fotoVacia(usuario)"></ion-img>
+          </ion-thumbnail>
+          <ion-label>
+            <ion-text>
+              <h3 class="text-black font-sans-serif">{{usuario?.socio.nombres}} {{usuario?.socio.apellidos}} </h3>
+            </ion-text>
+            <ion-text color="tertiary">
+              <h6 class="fw-bold font-sans-serif">
+                ci • {{usuario?.socio.ci}}
+              </h6>
+            </ion-text>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+    <div class="abs-center" *ngIf="!loaded">
+      <ion-list lines="none">
+        <ion-item *ngFor="let usuario of list" button="false" detail="false">
+          <ion-thumbnail slot="start">
+            <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+          </ion-thumbnail>
+          <ion-label>
+            <ion-text>
+              <h3>
+                <ion-skeleton-text [animated]="true" class="w-50"></ion-skeleton-text>
+              </h3>
+            </ion-text>
+            <ion-text>
+              <h6>
+                <ion-skeleton-text [animated]="true" class="w-50"></ion-skeleton-text>
+              </h6>
+            </ion-text>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+</ion-content>

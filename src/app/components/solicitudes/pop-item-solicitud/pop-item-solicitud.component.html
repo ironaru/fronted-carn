@@ -1,0 +1,8 @@
+<ion-content>
+  <ion-button (click)="modalSolicitud()" expand="block" fill="clear" shape="round">
+    Ver Solicitud
+  </ion-button>
+  <ion-button *ngIf="eliminarDisponible()" (click)="eliminarSolicitud()" color="danger" expand="block" fill="clear" shape="round">
+    Eliminar
+  </ion-button>
+</ion-content>

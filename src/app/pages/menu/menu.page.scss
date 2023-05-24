@@ -1,0 +1,14 @@
+ion-toolbar {
+  --background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+  --color: #ffffff;
+}
+.perfil{
+  --background: linear-gradient(90deg, #1CB5E0 0%, #4b5dfb 100%);
+}
+ion-item{
+  margin-left: 3%;
+  margin-right: 3%;
+  --color: #363636;
+  --border-radius: 0.5em;
+}
+

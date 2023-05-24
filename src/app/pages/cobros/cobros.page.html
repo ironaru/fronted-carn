@@ -1,0 +1,84 @@
+<ion-header mode="md">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="volverMenu()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Cobros</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="menuPop($event)">
+        <ion-icon name="ellipsis-horizontal-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-row *ngIf="verificaRol() && lista.length>0" class="ion-justify-content-center">
+    <ion-col size="12" sizeSm="4">
+      <ion-toolbar mode="md">
+        <ion-searchbar class="custom" placeholder="Buscar nit" debounce="250"
+          (ionChange)="handleChange($event)"></ion-searchbar>
+      </ion-toolbar>
+    </ion-col>
+    <ion-col size="12" sizeSm="5">
+      <ion-text color="dark">
+        <h6 class="texto w-100">De: <input class="border border-dark border-opacity-25 rounded-2 text-end" #datoI
+            (input)="inputInicial(datoI.value)" [(ngModel)]="fechaI" type="date">
+          A: <input class="border border-dark border-opacity-25 rounded-2 text-end" #datoF
+            (input)="inputFinal(datoF.value)" [(ngModel)]="fechaF" type="date"></h6>
+      </ion-text>
+    </ion-col>
+  </ion-row>
+  <div class=" contenido">
+    <div class="abs-center" *ngIf="loaded">
+      <ion-list lines="none">
+        <ion-item button="true" (click)="popCobro($event, cobro)" detail="false"
+          *ngFor="let cobro of lista | filtroCobro:textoBuscar | filtroFechaI:fechaI | filtroFechaF:fechaF">
+          <ion-label>
+            <ion-text color="light">
+              Fecha:
+              <ion-text class="text-dark">
+                {{cobro?.fechaHora | date:"dd/MM/yyyy"}}
+              </ion-text>
+            </ion-text>
+            <br>
+            <ion-text color="light">
+              Hora:
+              <ion-text class="text-dark">
+                {{cobro?.fechaHora | date:"hh:mm a"}}
+              </ion-text>
+            </ion-text>
+            <br>
+            <ion-text color="light">
+              Monto:
+              <ion-text class="text-dark">
+                {{cobro?.monto}} Bs
+              </ion-text>
+            </ion-text>
+            <br>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+    <div class="abs-center" *ngIf="!loaded">
+      <ion-list lines="none">
+        <ion-item button="true" (click)="popCobro($event, cobro)" detail="false"
+          *ngFor="let cobro of lista | filtroCobro:textoBuscar | filtroFechaI:fechaI | filtroFechaF:fechaF">
+          <ion-label>
+            <ion-text>
+              <ion-skeleton-text [animated]="true" class="w-50"></ion-skeleton-text>
+            </ion-text>
+            <ion-text>
+              <ion-skeleton-text [animated]="true" class="w-50"></ion-skeleton-text>
+            </ion-text>
+            <ion-text>
+              <ion-skeleton-text [animated]="true" class="w-50"></ion-skeleton-text>
+            </ion-text>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+</ion-content>

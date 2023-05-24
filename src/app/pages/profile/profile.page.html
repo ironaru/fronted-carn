@@ -1,0 +1,145 @@
+<ion-header mode="md">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+        <ion-button (click)="volver()">
+          <ion-icon name="arrow-back"></ion-icon>
+        </ion-button>
+    </ion-buttons>
+    <ion-title>Información de Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class=" contenido">
+    <div class="abs-center">
+      <ion-card mode="ios">
+        <ion-card-header>
+          <ion-card-title>
+            Perfil de Usuario
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="img-wrapper">
+            <img class="lazyload" [src]="previsualizacion" class="border border-1 border-dark rounded-3" />
+            <ion-button color="light" >
+              <ion-input class="FileUpload" accept=".jpg,.png,.jpeg" type="file" (change)="capturarFile($event)"></ion-input>
+              <ion-icon slot="icon-only" name="camera-outline" color="medium"></ion-icon>
+            </ion-button>
+          </div>
+          <ion-grid>
+            <ion-row class="ion-justify-content-center">
+              <ion-col size="12" size-sm="5">
+                <ion-text color="dark" class="w-100">Usuario:</ion-text>
+              </ion-col>
+              <ion-col size="12" size-sm="6">
+                <ion-text color="dark">
+                  <h5 class="w-100 text-end">
+                    {{usuario?.usuario}}
+                  </h5>
+                </ion-text>
+              </ion-col>
+            </ion-row>
+            <ion-row *ngIf="usuario.socio.ci != null" class="ion-justify-content-center">
+              <ion-col size="12" size-sm="5">
+                <ion-text color="dark" class="w-100">CI:</ion-text>
+              </ion-col>
+              <ion-col size="12" size-sm="6">
+                <ion-text color="dark">
+                  <h5 class="w-100 text-end">
+                    {{usuario?.socio.ci}}
+                  </h5>
+                </ion-text>
+              </ion-col>
+            </ion-row>
+            <ion-row *ngIf="usuario.socio.celular != null" class="ion-justify-content-center">
+              <ion-col size="12" size-sm="5">
+                <ion-text color="dark" class="w-100">Celular:</ion-text>
+              </ion-col>
+              <ion-col size="12" size-sm="6">
+                <ion-text color="dark">
+                  <h5 class="w-100 text-end">
+                    {{usuario?.socio.celular}}
+                  </h5>
+                </ion-text>
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-justify-content-center">
+              <ion-col size="12" size-sm="5">
+                <ion-text color="dark">
+                  Correo:
+                </ion-text>
+              </ion-col>
+              <ion-col size="12" size-sm="6">
+                <ion-text color="dark">
+                  <h5 class="w-100 text-end">
+                    {{usuario?.socio.correo}}
+                  </h5>
+                </ion-text>
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-justify-content-center">
+              <ion-col size="12" size-sm="5">
+                <ion-text color="dark" class="w-100">Nombres:</ion-text>
+              </ion-col>
+              <ion-col size="12" size-sm="6">
+                <ion-text color="dark">
+                  <h5 class="w-100 text-end">
+                    {{usuario?.socio.nombres}}
+                  </h5>
+                </ion-text>
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-justify-content-center">
+              <ion-col size="12" size-sm="5">
+                <ion-text color="dark" class="w-100">Apellidos:</ion-text>
+              </ion-col>
+              <ion-col size="12" size-sm="6">
+                <ion-text color="dark">
+                  <h5 class="w-100 text-end">
+                    {{usuario?.socio.apellidos}}
+                  </h5>
+                </ion-text>
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-justify-content-center">
+              <ion-col size="12" size-sm="5">
+                <ion-text color="dark" class="w-100">Fecha de nacimiento:</ion-text>
+              </ion-col>
+              <ion-col size="12" size-sm="6">
+                <ion-text color="dark">
+                  <h5 class="w-100 text-end">
+                    {{usuario?.socio.fechaNac | date:"dd/MM/yyyy"}}
+                  </h5>
+                </ion-text>
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-justify-content-center">
+              <ion-col size="12" size-sm="5">
+                <ion-text color="dark" class="w-100">Dirección:</ion-text>
+              </ion-col>
+              <ion-col size="12" size-sm="6">
+                <ion-text color="dark">
+                  <h5 class="w-100 text-end">
+                    {{usuario?.socio.direccion}}
+                  </h5>
+                </ion-text>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </div>
+    <div class="abs-center">
+      <ion-card mode="ios">
+        <ion-card-header>
+          <ion-card-title>Seguridad</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-item detail="false" (click)="password()" button>
+            <ion-text>Cambiar contraseña</ion-text>
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,15 @@
+
+<ion-content>
+  <ion-button  expand="block" fill="clear" shape="round" (click)="verMedidor()">
+   Ver medidor
+  </ion-button>
+  <ion-button  expand="block" fill="clear" shape="round" (click)="verConsumos()">
+    Consumos
+   </ion-button>
+   <ion-button  expand="block" fill="clear" shape="round" (click)="verCobros()">
+    Cobros
+   </ion-button>
+  <ion-button *ngIf="verificaRol()" color="danger" expand="block" fill="clear" shape="round" (click)="eliminarMedidor()">
+    Eliminar
+   </ion-button>
+</ion-content>
