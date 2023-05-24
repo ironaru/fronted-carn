@@ -2,7 +2,7 @@ import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'io.ionic.starter',
-  appName: 'Comite Racho del Norte',
+  appName: 'Gestion',
   webDir: 'www',
   bundledWebRuntime: false
 };

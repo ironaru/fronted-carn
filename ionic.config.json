@@ -3,7 +3,5 @@
   "integrations": {
     "capacitor": {}
   },
-  "type": "angular",
-  "v2": true,
-  "typescript": true
+  "type": "angular"
 }
